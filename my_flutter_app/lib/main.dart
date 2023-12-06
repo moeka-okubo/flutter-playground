@@ -21,9 +21,27 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
-      body: widget.child,
-    );
+        appBar: AppBar(
+          title: const Text('Flutter勉強用'),
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    widget.title,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  )),
+              widget.child,
+            ],
+          ),
+        ));
   }
 }
 
@@ -34,7 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter勉強用',
       theme: ThemeData(
         // This is the theme of your application.
         //
