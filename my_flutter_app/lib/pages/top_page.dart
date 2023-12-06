@@ -16,48 +16,34 @@ class Article {
 }
 
 class TopPage extends StatefulWidget {
-  final List<Article> articles = [
-    Article(
-        imagePath: 'image/150_150.png',
-        title: 'ブログタイトル1つ目',
-        detail:
-            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-        date: '2023/12/1'),
-    Article(
-        imagePath: 'image/150_150.png',
-        title: 'ブログタイトル1つ目',
-        detail:
-            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-        date: '2023/12/1'),
-    Article(
-        imagePath: 'image/150_150.png',
-        title: 'ブログタイトル1つ目',
-        detail:
-            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-        date: '2023/12/1'),
-    Article(
-        imagePath: 'image/150_150.png',
-        title: 'ブログタイトル1つ目',
-        detail:
-            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-        date: '2023/12/1'),
-    Article(
-        imagePath: 'image/150_150.png',
-        title: 'ブログタイトル1つ目',
-        detail:
-            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-        date: '2023/12/1'),
-  ];
-
   final double cardSpacingHorizontal = 16;
 
-  TopPage({super.key});
+  const TopPage({super.key});
 
   @override
   State<TopPage> createState() => _TopPageState();
 }
 
 class _TopPageState extends State<TopPage> {
+  late List<Article> articles;
+
+  @override
+  void initState() {
+    super.initState();
+    articles = generateArticles(5);
+  }
+
+  List<Article> generateArticles(int count) {
+    return List.generate(
+        count,
+        (index) => Article(
+            imagePath: 'image/150_150.png',
+            title: 'ブログタイトル${index + 1}つ目',
+            detail:
+                '【これは${index + 1}つ目のブログです】ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+            date: '2023/12/${index + 1}'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BasePage(
@@ -67,17 +53,17 @@ class _TopPageState extends State<TopPage> {
         children: <Widget>[
           LayoutBuilder(
             builder: (context, constraints) {
-              double width = constraints.maxWidth / widget.articles.length;
-              double test = (200 * widget.articles.length) +
-                  (widget.cardSpacingHorizontal * (widget.articles.length - 1));
+              double width = constraints.maxWidth / articles.length;
+              double test = (200 * articles.length) +
+                  (widget.cardSpacingHorizontal * (articles.length - 1));
               width = width < 200 ? 200 : width;
 
               double cardWidth = test <= constraints.maxWidth
-                  ? 200 + (constraints.maxWidth - test) / widget.articles.length
+                  ? 200 + (constraints.maxWidth - test) / articles.length
                   : (width < 200 ? 200 : width);
 
               List<Widget> cards = <Widget>[
-                for (var article in widget.articles)
+                for (var article in articles)
                   SizedBox(
                     width: cardWidth,
                     child: ArticleListCard(

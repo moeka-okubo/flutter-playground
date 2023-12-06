@@ -24,7 +24,6 @@ class _ArticleListCardState extends State<ArticleListCard> {
     return ConstrainedBox(
         constraints: const BoxConstraints(minWidth: 200),
         child: Card(
-          // margin: const EdgeInsets.all(16),
           child: InkWell(
             onTap: () {
               Navigator.push(context,
@@ -36,7 +35,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Image.asset(widget.imagePath),
+                    Center(child: Image.asset(widget.imagePath)),
                     Padding(
                       padding: const EdgeInsets.only(top: 24),
                       child: Text(
