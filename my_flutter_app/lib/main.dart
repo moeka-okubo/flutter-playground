@@ -112,9 +112,37 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            const Text(
-              'こんな感じでテキスト追加できる'
-            )
+            const Text('こんな感じでテキスト追加できる'),
+            Card(
+              margin: const EdgeInsets.all(40),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text(
+                      'ブログのタイトル',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                        'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要'),
+                    const SizedBox(height: 8),
+                    // Image.network(
+                    //   '/image/150_150.png',
+                    //   fit: BoxFit.cover,
+                    // ),
+                    Image.asset('image/150_150.png'),
+                    const SizedBox(height: 8),
+                    const Text('2023/12/01'),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
