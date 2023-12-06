@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/detail_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'ここがヘッダーみたいな部分'),
+      routes: {
+        '/': (context) => const MyHomePage(title: 'ここがヘッダーみたいな部分'),
+        '/detail': (context) => const DetailPage()
+      },
     );
   }
 }
@@ -113,35 +117,50 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const Text('こんな感じでテキスト追加できる'),
-            Card(
-              margin: const EdgeInsets.all(40),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      'ブログのタイトル',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            LayoutBuilder(
+              builder: (context, constraints) {
+                double width = constraints.maxWidth * 0.25; // 画面幅の25%
+
+                return Center(
+                  child: SizedBox(
+                    width: width,
+                    child: Card(
+                      margin: const EdgeInsets.all(40),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DetailPage()));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const Text(
+                                'ブログのタイトル',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              const Text(
+                                  'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要'),
+                              const SizedBox(height: 8),
+                              Image.asset('image/150_150.png'),
+                              const SizedBox(height: 8),
+                              const Text('2023/12/01'),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                        'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要'),
-                    const SizedBox(height: 8),
-                    // Image.network(
-                    //   '/image/150_150.png',
-                    //   fit: BoxFit.cover,
-                    // ),
-                    Image.asset('image/150_150.png'),
-                    const SizedBox(height: 8),
-                    const Text('2023/12/01'),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ],
         ),
