@@ -25,7 +25,12 @@ class _TopPageState extends State<TopPage> {
               return Center(
                 child: SizedBox(
                   width: width,
-                  child: const ArticleListCard(title: 'ブログタイトル1つ目'),
+                  child: const ArticleListCard(
+                      imagePath: 'image/150_150.png',
+                      title: 'ブログタイトル1つ目',
+                      detail:
+                          'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+                      date: '2023/12/1'),
                 ),
               );
             },

@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/pages/detail_page.dart';
 
 class ArticleListCard extends StatefulWidget {
+  final String imagePath;
   final String title;
+  final String detail;
+  final String date;
 
-  const ArticleListCard({super.key, required this.title});
+  const ArticleListCard(
+      {super.key,
+      required this.imagePath,
+      required this.title,
+      required this.detail,
+      required this.date});
 
   @override
   State<ArticleListCard> createState() => _ArticleListCardState();
@@ -25,7 +33,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Image.asset('image/150_150.png'),
+                Image.asset(widget.imagePath),
                 Padding(
                   padding: const EdgeInsets.only(top: 24),
                   child: Text(
@@ -39,17 +47,17 @@ class _ArticleListCardState extends State<ArticleListCard> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+                Text(
+                  widget.detail,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
-                  style: TextStyle(
+                  style: const TextStyle(
                     height: 1.2,
                   ),
                 ),
                 Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child: const Text('2023/12/1')),
+                    child: Text(widget.date)),
               ],
             )),
       ),
