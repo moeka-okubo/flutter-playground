@@ -23,7 +23,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
         child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Image.asset('image/150_150.png'),
                 Padding(
@@ -43,8 +43,13 @@ class _ArticleListCardState extends State<ArticleListCard> {
                   'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
+                  style: TextStyle(
+                    height: 1.2,
+                  ),
                 ),
-                const Text('2023/12/1'),
+                Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: const Text('2023/12/1')),
               ],
             )),
       ),
