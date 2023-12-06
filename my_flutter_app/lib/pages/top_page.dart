@@ -32,9 +32,6 @@ class _TopPageState extends State<TopPage> {
                   ? 200 + (constraints.maxWidth - test) / length
                   : (width < 200 ? 200 : width);
 
-              var typeOfFirstElement = articles[0].runtimeType;
-              print(typeOfFirstElement);
-
               List<Widget> cards = <Widget>[
                 for (var article in widget.articles)
                   SizedBox(
