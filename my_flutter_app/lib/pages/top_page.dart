@@ -29,7 +29,27 @@ class TopPage extends StatefulWidget {
         detail:
             'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
         date: '2023/12/1'),
+    Article(
+        imagePath: 'image/150_150.png',
+        title: 'ブログタイトル1つ目',
+        detail:
+            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+        date: '2023/12/1'),
+    Article(
+        imagePath: 'image/150_150.png',
+        title: 'ブログタイトル1つ目',
+        detail:
+            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+        date: '2023/12/1'),
+    Article(
+        imagePath: 'image/150_150.png',
+        title: 'ブログタイトル1つ目',
+        detail:
+            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+        date: '2023/12/1'),
   ];
+
+  final double cardSpacingHorizontal = 16;
 
   TopPage({super.key});
 
@@ -45,15 +65,21 @@ class _TopPageState extends State<TopPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text('こんな感じでテキスト追加できる'),
           LayoutBuilder(
             builder: (context, constraints) {
-              double width = constraints.maxWidth * 0.25; // 画面幅の25%
+              double width = constraints.maxWidth / widget.articles.length;
+              double test = (200 * widget.articles.length) +
+                  (widget.cardSpacingHorizontal * (widget.articles.length - 1));
+              width = width < 200 ? 200 : width;
+
+              double cardWidth = test <= constraints.maxWidth
+                  ? 200 + (constraints.maxWidth - test) / widget.articles.length
+                  : (width < 200 ? 200 : width);
 
               List<Widget> cards = <Widget>[
                 for (var article in widget.articles)
                   SizedBox(
-                    width: width,
+                    width: cardWidth,
                     child: ArticleListCard(
                       imagePath: article.imagePath,
                       title: article.title,
@@ -64,7 +90,10 @@ class _TopPageState extends State<TopPage> {
               ];
 
               return Center(
-                child: Column(
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  spacing: widget.cardSpacingHorizontal,
+                  runSpacing: 8, // 行間の隙間を適宜調整
                   children: cards,
                 ),
               );

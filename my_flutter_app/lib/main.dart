@@ -21,27 +21,29 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter勉強用'),
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      appBar: AppBar(
+        title: const Text('Flutter勉強用'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: SingleChildScrollView(
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  widget.title,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                )),
+            widget.child,
+          ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    widget.title,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  )),
-              widget.child,
-            ],
-          ),
-        ));
+      )),
+    );
   }
 }
 
