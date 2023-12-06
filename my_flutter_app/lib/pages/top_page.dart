@@ -79,13 +79,12 @@ class _TopPageState extends State<TopPage> {
                 child: Wrap(
                   alignment: WrapAlignment.start,
                   spacing: widget.cardSpacingHorizontal,
-                  runSpacing: 8, // 行間の隙間を適宜調整
+                  runSpacing: 8,
                   children: cards,
                 ),
               );
             },
           ),
-          // ここまで変更
         ],
       ),
     );
