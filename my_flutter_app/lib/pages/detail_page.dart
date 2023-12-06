@@ -14,52 +14,20 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-        title: '詳細',
+        title: widget.article.title,
         child: Column(
           children: <Widget>[
-            const Text('ここは詳細画面に移動できている'),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                double width = constraints.maxWidth * 0.25; // 画面幅の25%
-
-                return Center(
-                  child: SizedBox(
-                    width: width,
-                    child: Card(
-                      margin: const EdgeInsets.all(40),
-                      child: InkWell(
-                        onTap: () {
-                          print(widget.itemId);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              const Text(
-                                'ブログのタイトル',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                  'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要'),
-                              const SizedBox(height: 8),
-                              Image.asset('image/150_150.png'),
-                              const SizedBox(height: 8),
-                              const Text('2023/12/01'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
+            Image.asset(widget.article.imagePath),
+            // Right(
+            //   Text(widget.article.date),
+            // ),
+            Container(
+              margin: const EdgeInsets.only(
+                  top: 0, left: 10, right: 10, bottom: 20),
+              height: 1,
+              color: Colors.grey,
             ),
+            Text(widget.article.detail),
           ],
         ));
   }

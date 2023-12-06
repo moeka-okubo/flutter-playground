@@ -10,7 +10,7 @@ List<Article> generateArticles(int count) {
   return List.generate(
       count,
       (index) => Article(
-          id: index,
+          id: index + 1,
           imagePath: 'image/150_150.png',
           title: 'ブログタイトル${index + 1}つ目',
           detail:
