@@ -2,50 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/components/article_list_card.dart';
 import 'package:my_flutter_app/main.dart';
 
-class Article {
-  final String imagePath;
-  final String title;
-  final String detail;
-  final String date;
-
-  Article(
-      {required this.imagePath,
-      required this.title,
-      required this.detail,
-      required this.date});
-}
-
 class TopPage extends StatefulWidget {
   final double cardSpacingHorizontal = 16;
+  final List<Article> articles;
 
-  const TopPage({super.key});
+  const TopPage({super.key, required this.articles});
 
   @override
   State<TopPage> createState() => _TopPageState();
 }
 
 class _TopPageState extends State<TopPage> {
-  late List<Article> articles;
-
-  @override
-  void initState() {
-    super.initState();
-    articles = generateArticles(5);
-  }
-
-  List<Article> generateArticles(int count) {
-    return List.generate(
-        count,
-        (index) => Article(
-            imagePath: 'image/150_150.png',
-            title: 'ブログタイトル${index + 1}つ目',
-            detail:
-                '【これは${index + 1}つ目のブログです】ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-            date: '2023/12/${index + 1}'));
-  }
-
   @override
   Widget build(BuildContext context) {
+    int length = widget.articles.length;
     return BasePage(
       title: 'トップページ',
       child: Column(
@@ -53,24 +23,24 @@ class _TopPageState extends State<TopPage> {
         children: <Widget>[
           LayoutBuilder(
             builder: (context, constraints) {
-              double width = constraints.maxWidth / articles.length;
-              double test = (200 * articles.length) +
-                  (widget.cardSpacingHorizontal * (articles.length - 1));
-              width = width < 200 ? 200 : width;
+              double width = constraints.maxWidth / length;
+              double test = (200 * length) +
+                  (widget.cardSpacingHorizontal * (length - 1));
+              // width = width < 200 ? 200 : width;
 
               double cardWidth = test <= constraints.maxWidth
-                  ? 200 + (constraints.maxWidth - test) / articles.length
+                  ? 200 + (constraints.maxWidth - test) / length
                   : (width < 200 ? 200 : width);
 
+              var typeOfFirstElement = articles[0].runtimeType;
+              print(typeOfFirstElement);
+
               List<Widget> cards = <Widget>[
-                for (var article in articles)
+                for (var article in widget.articles)
                   SizedBox(
                     width: cardWidth,
                     child: ArticleListCard(
-                      imagePath: article.imagePath,
-                      title: article.title,
-                      detail: article.detail,
-                      date: article.date,
+                      article: article,
                     ),
                   ),
               ];

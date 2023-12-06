@@ -6,6 +6,35 @@ void main() {
   runApp(const MyApp());
 }
 
+List<Article> generateArticles(int count) {
+  return List.generate(
+      count,
+      (index) => Article(
+          id: index,
+          imagePath: 'image/150_150.png',
+          title: 'ブログタイトル${index + 1}つ目',
+          detail:
+              '【これは${index + 1}つ目のブログです】ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+          date: '2023/12/${index + 1}'));
+}
+
+final List<Article> articles = generateArticles(5);
+
+class Article {
+  final int id;
+  final String imagePath;
+  final String title;
+  final String detail;
+  final String date;
+
+  Article(
+      {required this.id,
+      required this.imagePath,
+      required this.title,
+      required this.detail,
+      required this.date});
+}
+
 class BasePage extends StatefulWidget {
   final String title;
   final Widget child;
@@ -74,9 +103,18 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routes: {
-        '/': (context) => TopPage(),
-        '/detail': (context) => const DetailPage()
+      home: TopPage(articles: articles),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/detail') {
+          final arguments = settings.arguments as int;
+          return MaterialPageRoute(
+              builder: (context) => DetailPage(
+                    itemId: arguments,
+                    article: articles[arguments],
+                  ));
+        }
+        assert(false, 'Need to implement ${settings.name}');
+        return null;
       },
     );
   }

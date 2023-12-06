@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_app/main.dart';
 import 'package:my_flutter_app/pages/detail_page.dart';
 
 class ArticleListCard extends StatefulWidget {
-  final String imagePath;
-  final String title;
-  final String detail;
-  final String date;
+  final Article article;
 
-  const ArticleListCard(
-      {super.key,
-      required this.imagePath,
-      required this.title,
-      required this.detail,
-      required this.date});
+  const ArticleListCard({super.key, required this.article});
 
   @override
   State<ArticleListCard> createState() => _ArticleListCardState();
@@ -26,8 +19,13 @@ class _ArticleListCardState extends State<ArticleListCard> {
         child: Card(
           child: InkWell(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const DetailPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DetailPage(
+                            itemId: widget.article.id,
+                            article: widget.article,
+                          )));
             },
             child: Padding(
                 padding:
@@ -35,11 +33,11 @@ class _ArticleListCardState extends State<ArticleListCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Center(child: Image.asset(widget.imagePath)),
+                    Center(child: Image.asset(widget.article.imagePath)),
                     Padding(
                       padding: const EdgeInsets.only(top: 24),
                       child: Text(
-                        widget.title,
+                        widget.article.title,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -50,7 +48,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.detail,
+                      widget.article.detail,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: const TextStyle(
@@ -59,7 +57,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
                     ),
                     Padding(
                         padding: const EdgeInsets.only(top: 8),
-                        child: Text(widget.date)),
+                        child: Text(widget.article.date)),
                   ],
                 )),
           ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/main.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final int itemId;
+  final Article article;
+  const DetailPage({super.key, required this.itemId, required this.article});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -27,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
                       margin: const EdgeInsets.all(40),
                       child: InkWell(
                         onTap: () {
-                          print('押された');
+                          print(widget.itemId);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
