@@ -2,8 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/components/article_list_card.dart';
 import 'package:my_flutter_app/main.dart';
 
+class Article {
+  final String imagePath;
+  final String title;
+  final String detail;
+  final String date;
+
+  Article(
+      {required this.imagePath,
+      required this.title,
+      required this.detail,
+      required this.date});
+}
+
 class TopPage extends StatefulWidget {
-  const TopPage({super.key});
+  final List<Article> articles = [
+    Article(
+        imagePath: 'image/150_150.png',
+        title: 'ブログタイトル1つ目',
+        detail:
+            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+        date: '2023/12/1'),
+    Article(
+        imagePath: 'image/150_150.png',
+        title: 'ブログタイトル1つ目',
+        detail:
+            'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+        date: '2023/12/1'),
+  ];
+  TopPage({super.key});
 
   @override
   State<TopPage> createState() => _TopPageState();
