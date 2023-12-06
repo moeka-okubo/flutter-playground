@@ -25,7 +25,7 @@ class _TopPageState extends State<TopPage> {
               return Center(
                 child: SizedBox(
                   width: width,
-                  child: const ArticleListCard(),
+                  child: const ArticleListCard(title: 'ブログタイトル1つ目'),
                 ),
               );
             },

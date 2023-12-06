@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_flutter_app/pages/detail_page.dart';
 
 class ArticleListCard extends StatefulWidget {
-  const ArticleListCard({super.key});
+  final String title;
+
+  const ArticleListCard({super.key, required this.title});
 
   @override
   State<ArticleListCard> createState() => _ArticleListCardState();
@@ -23,14 +25,25 @@ class _ArticleListCardState extends State<ArticleListCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  '【component化した】ブログのタイトル',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Image.asset('image/150_150.png'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: Text(
+                    widget.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                    'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要'),
-                Image.asset('image/150_150.png'),
+                  'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                ),
                 const Text('2023/12/1'),
               ],
             )),
