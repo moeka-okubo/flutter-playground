@@ -30,6 +30,7 @@ class TopPage extends StatefulWidget {
             'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
         date: '2023/12/1'),
   ];
+
   TopPage({super.key});
 
   @override
@@ -49,19 +50,27 @@ class _TopPageState extends State<TopPage> {
             builder: (context, constraints) {
               double width = constraints.maxWidth * 0.25; // 画面幅の25%
 
+              List<Widget> cards = <Widget>[
+                for (var article in widget.articles)
+                  SizedBox(
+                    width: width,
+                    child: ArticleListCard(
+                      imagePath: article.imagePath,
+                      title: article.title,
+                      detail: article.detail,
+                      date: article.date,
+                    ),
+                  ),
+              ];
+
               return Center(
-                child: SizedBox(
-                  width: width,
-                  child: const ArticleListCard(
-                      imagePath: 'image/150_150.png',
-                      title: 'ブログタイトル1つ目',
-                      detail:
-                          'ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要ブログの概要',
-                      date: '2023/12/1'),
+                child: Column(
+                  children: cards,
                 ),
               );
             },
           ),
+          // ここまで変更
         ],
       ),
     );
