@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app/main.dart';
-import 'package:my_flutter_app/pages/detail_page.dart';
 
 class ArticleListCard extends StatefulWidget {
   final Article article;
@@ -19,13 +18,7 @@ class _ArticleListCardState extends State<ArticleListCard> {
         child: Card(
           child: InkWell(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DetailPage(
-                            itemId: widget.article.id,
-                            article: widget.article,
-                          )));
+              Navigator.pushNamed(context, '/detail/${widget.article.id}');
             },
             child: Padding(
                 padding:

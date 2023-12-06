@@ -89,13 +89,13 @@ class MyApp extends StatelessWidget {
       ),
       home: TopPage(articles: articles),
       onGenerateRoute: (settings) {
-        if (settings.name == '/detail') {
-          final arguments = settings.arguments as int;
+        final uri = Uri.parse(settings.name!);
+        final pathSegments = uri.pathSegments;
+        if (pathSegments[0] == 'detail') {
+          final argument = int.parse(pathSegments[1]);
           return MaterialPageRoute(
-              builder: (context) => DetailPage(
-                    itemId: arguments,
-                    article: articles[arguments],
-                  ));
+              builder: (context) =>
+                  DetailPage(itemId: argument, article: articles[argument]));
         }
         assert(false, 'Need to implement ${settings.name}');
         return null;
