@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter_app/components/artilcle_list_button.dart';
+import 'package:my_flutter_app/components/article_list_button.dart';
 import 'package:my_flutter_app/main.dart';
 
 class DetailPage extends StatefulWidget {
