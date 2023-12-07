@@ -21,8 +21,8 @@ class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
     int length = widget.articles.length;
-    print('ここがtopに来ているところ');
-    print(widget.allData);
+    // print('ここがtopに来ているところ');
+    // print(widget.allData);
     return BasePage(
       title: 'トップページ',
       child: Column(
@@ -54,7 +54,7 @@ class _TopPageState extends State<TopPage> {
                   : (width < 200 ? 200 : width);
 
               List<Widget> cards = <Widget>[
-                for (var article in widget.articles)
+                for (var article in widget.allData)
                   SizedBox(
                     width: cardWidth,
                     child: ArticleListCard(

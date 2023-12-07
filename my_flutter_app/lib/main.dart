@@ -66,8 +66,6 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
-  late List<String> _allSavedData = [];
-
   @override
   void initState() {
     super.initState();
@@ -75,10 +73,7 @@ class _BasePageState extends State<BasePage> {
   }
 
   void _loadAllData() async {
-    List<String> allData = await getAllSavedData();
-    setState(() {
-      _allSavedData = allData;
-    });
+    setState(() {});
   }
 
   @override
@@ -151,8 +146,47 @@ class MyApp extends StatelessWidget {
         if (pathSegments[0] == 'detail') {
           final argument = int.parse(pathSegments[1]);
           return MaterialPageRoute(
-              builder: (context) =>
-                  DetailPage(itemId: argument, article: articles[argument]));
+            // builder: (context) => DetailPage(
+            //   itemId: argument,
+            //   article: articles[argument],
+            // ),
+            builder: (context) {
+              return FutureBuilder<List>(
+                future: getAllSavedData(),
+                builder: ((context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done &&
+                      snapshot.hasData) {
+                    print(snapshot.data);
+                    // TASK: これをJSONみたいにしないといけない
+                    final allSavedIds = snapshot.data!;
+                    if (allSavedIds.contains('data_$argument')) {
+                      return DetailPage(
+                        itemId: argument,
+                        article: articles[argument],
+                      );
+                    } else {
+                      return const Scaffold(
+                        body: Center(
+                          child: Text('IDがなかった'),
+                        ),
+                      );
+                    }
+                  } else if (snapshot.hasError) {
+                    return const Scaffold(
+                      body: Center(
+                        child: Text('データが取れんかった'),
+                      ),
+                    );
+                  }
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('ロード中かもなので待ってほしい'),
+                    ),
+                  );
+                }),
+              );
+            },
+          );
         }
         assert(false, 'Need to implement ${settings.name}');
         return null;
