@@ -11,6 +11,7 @@ class _articleListButtonState extends State<articleListButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 24),
       child: ElevatedButton(
         onPressed: () {
           Navigator.pushNamed(context, '/');
