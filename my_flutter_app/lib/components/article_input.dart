@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ArticleInput extends StatefulWidget {
+  final TextEditingController? controller;
   final String hintText;
   final bool isMultiLine;
   const ArticleInput({
     super.key,
+    this.controller,
     this.hintText = '',
     this.isMultiLine = false,
   });
@@ -18,6 +20,7 @@ class _ArticleInputState extends State<ArticleInput> {
   Widget build(BuildContext context) {
     if (widget.isMultiLine) {
       return TextField(
+        controller: widget.controller,
         decoration: InputDecoration(
           hintText: widget.hintText,
           border: const OutlineInputBorder(),
@@ -33,6 +36,7 @@ class _ArticleInputState extends State<ArticleInput> {
       );
     } else {
       return TextFormField(
+        controller: widget.controller,
         decoration: InputDecoration(
           hintText: widget.hintText,
           border: const OutlineInputBorder(),

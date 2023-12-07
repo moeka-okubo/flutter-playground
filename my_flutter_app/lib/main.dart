@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/top_page.dart';
 import 'pages/detail_page.dart';
 import 'pages/create_page.dart';
@@ -7,6 +8,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// 記事データ(モック)
 List<Article> generateArticles(int count) {
   return List.generate(
       count,
@@ -36,6 +38,22 @@ class Article {
       required this.date});
 }
 
+// 記事データ(保存したやつ)
+Future<List<String>> getAllSavedData() async {
+  final prefs = await SharedPreferences.getInstance();
+  final keys = prefs.getKeys();
+
+  return keys.where((String key) => key.startsWith('data_')).map((String key) {
+    return prefs.getString(key) ?? '';
+  }).toList();
+}
+
+Future<String?> getSingleData(String timestamp) async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('data_$timestamp');
+}
+
+// 共通レイアウトの作成
 class BasePage extends StatefulWidget {
   final String title;
   final Widget child;
@@ -48,6 +66,21 @@ class BasePage extends StatefulWidget {
 }
 
 class _BasePageState extends State<BasePage> {
+  late List<String> _allSavedData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllData();
+  }
+
+  void _loadAllData() async {
+    List<String> allData = await getAllSavedData();
+    setState(() {
+      _allSavedData = allData;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,6 +113,7 @@ class _BasePageState extends State<BasePage> {
   }
 }
 
+// 共通レイアウトと個別レイアウトの当て込み
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -92,8 +126,24 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/': (context) => TopPage(articles: articles),
-        '/create': (context) => CreatePage(),
+        '/': (context) => FutureBuilder<List<String>>(
+              future: getAllSavedData(),
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Center(child: Text('エラーが発生しました'));
+                  } else if (snapshot.hasData) {
+                    return TopPage(
+                        articles: articles, allData: snapshot.data ?? []);
+                  }
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+        '/create': (context) => const CreatePage(),
       },
       onGenerateRoute: (settings) {
         final uri = Uri.parse(settings.name!);

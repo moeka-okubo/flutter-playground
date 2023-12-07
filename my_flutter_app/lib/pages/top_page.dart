@@ -5,8 +5,13 @@ import 'package:my_flutter_app/main.dart';
 class TopPage extends StatefulWidget {
   final double cardSpacingHorizontal = 16;
   final List<Article> articles;
+  final List<String> allData;
 
-  const TopPage({super.key, required this.articles});
+  const TopPage({
+    super.key,
+    required this.articles,
+    required this.allData,
+  });
 
   @override
   State<TopPage> createState() => _TopPageState();
@@ -16,6 +21,8 @@ class _TopPageState extends State<TopPage> {
   @override
   Widget build(BuildContext context) {
     int length = widget.articles.length;
+    print('ここがtopに来ているところ');
+    print(widget.allData);
     return BasePage(
       title: 'トップページ',
       child: Column(
