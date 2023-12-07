@@ -32,7 +32,7 @@ class _DetailPageState extends State<DetailPage> {
                 color: Colors.grey,
               ),
               Text(widget.article.detail),
-              const articleListButton(),
+              const ArticleListButton(),
             ],
           ),
         ),

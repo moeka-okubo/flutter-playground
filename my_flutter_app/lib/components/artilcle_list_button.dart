@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class articleListButton extends StatefulWidget {
-  const articleListButton({super.key});
+class ArticleListButton extends StatefulWidget {
+  const ArticleListButton({super.key});
 
   @override
-  State<articleListButton> createState() => _articleListButtonState();
+  State<ArticleListButton> createState() => _ArticleListButtonState();
 }
 
-class _articleListButtonState extends State<articleListButton> {
+class _ArticleListButtonState extends State<ArticleListButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
