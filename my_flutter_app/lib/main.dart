@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/top_page.dart';
 import 'pages/detail_page.dart';
+import 'pages/create_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,12 +63,15 @@ class _BasePageState extends State<BasePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-                padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
+              child: Center(
                 child: Text(
                   widget.title,
                   style: const TextStyle(
                       fontSize: 24, fontWeight: FontWeight.bold),
-                )),
+                ),
+              ),
+            ),
             widget.child,
           ],
         ),
@@ -87,7 +91,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: TopPage(articles: articles),
+      routes: {
+        '/': (context) => TopPage(articles: articles),
+        '/create': (context) => CreatePage(),
+      },
       onGenerateRoute: (settings) {
         final uri = Uri.parse(settings.name!);
         final pathSegments = uri.pathSegments;

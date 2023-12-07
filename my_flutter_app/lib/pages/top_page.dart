@@ -21,12 +21,26 @@ class _TopPageState extends State<TopPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/create');
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).cardColor,
+                    foregroundColor: Colors.pink),
+                child: const Text('新規で作成する'),
+              ),
+            ),
+          ),
           LayoutBuilder(
             builder: (context, constraints) {
               double width = constraints.maxWidth / length;
               double test = (200 * length) +
                   (widget.cardSpacingHorizontal * (length - 1));
-              // width = width < 200 ? 200 : width;
 
               double cardWidth = test <= constraints.maxWidth
                   ? 200 + (constraints.maxWidth - test) / length
